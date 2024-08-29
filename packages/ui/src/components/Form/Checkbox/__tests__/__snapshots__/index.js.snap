@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`common/Form/Checkbox will render and match snapshot 1`] = `
+<div
+  class="ss-control--checkbox"
+>
+  
+  <label
+    class="ck-item"
+  >
+    <input
+      type="checkbox"
+      value="0"
+    />
+    <!--v-if-->
+  </label>
+  <label
+    class="ck-item"
+  >
+    <input
+      type="checkbox"
+      value="1"
+    />
+    <!--v-if-->
+  </label>
+  <label
+    class="ck-item"
+  >
+    <input
+      type="checkbox"
+      value="2"
+    />
+    <!--v-if-->
+  </label>
+  <label
+    class="ck-item"
+  >
+    <input
+      type="checkbox"
+      value="3"
+    />
+    <!--v-if-->
+  </label>
+  
+</div>
+`;

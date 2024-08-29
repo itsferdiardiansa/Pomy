@@ -8,25 +8,53 @@ const Template = args => ({
   template: '<ZButton v-bind="args" />',
 })
 
-export const Primary = Template.bind({})
-Primary.args = { variant: 'primary', label: 'Click me' }
+export const Basic = Template.bind({})
+Basic.args = { variant: 'primary', label: 'Click me' }
 
 export default {
-  title: 'Core/Button',
+  title: 'Core/Components/Button',
   component: ZButton,
   args: { label: 'Button' },
   argTypes: {
-    variant: {
-      options: ['primary'],
-      control: 'select',
+    label: {
+      control: 'text',
     },
-    shape: {
-      options: ['default', 'round'],
+    inverse: {
+      control: 'boolean',
+      default: false,
+    },
+    variant: {
       control: 'select',
+      options: [
+        'primary',
+        'danger',
+        'warning',
+        'dark',
+        'success',
+        'light',
+        'orange',
+      ],
     },
     size: {
-      options: ['medium', 'large'],
       control: 'select',
+      options: ['xs', 'sm', 'base', 'lg', 'xl'],
+      default: 'base',
+    },
+    bold: {
+      control: 'boolean',
+      default: false,
+    },
+    disabled: {
+      control: 'boolean',
+      default: false,
+    },
+    rounded: {
+      control: 'boolean',
+      default: true,
+    },
+    pill: {
+      control: 'boolean',
+      default: false,
     },
   },
 }

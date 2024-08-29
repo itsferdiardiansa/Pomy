@@ -1,69 +1,115 @@
 <template>
-  <button :class="customCls">
-    {{ label }}
+  <button :class="cls" :disabled="disabled || isLoading" @click="handleClick">
+    <div :class="`${prefixClass}-button--wrapper`">
+      <template v-if="icon.length">
+        <!-- <div :class="`${prefixClass}-button--icon`" v-if="!isLoading">
+          <font-awesome-icon :icon="icon" ref="iconElement" />
+        </div> -->
+      </template>
 
-    <slot></slot>
+      <template v-if="hasSlot || label.length">
+        <div
+          :class="[`${prefixClass}-button--label`, { 'has-icon': icon.length }]"
+          v-if="!isLoading"
+        >
+          <slot>
+            {{ label }}
+          </slot>
+        </div>
+
+        <div :class="`${prefixClass}-button--spinner`" v-else>
+          <Spinner :width="20" :height="20" />
+        </div>
+      </template>
+    </div>
   </button>
 </template>
-
 <script setup lang="ts">
-import { computed, useCssModule } from 'vue'
+import { computed, ref, useSlots } from 'vue'
+import { Spinner } from '@/components/loader/spinner'
+import { prefixClass } from '@/constants'
+import defaultProps from './props'
+import type { ButtonTypes } from './props'
 
-// ========= Types ===========
-const ButtonVariants = ['primary'] as const
-const ButtonShape = ['default', 'round']
-const ButtonSize = ['medium', 'large']
+const props = withDefaults(defineProps<ButtonTypes>(), defaultProps)
+const emit = defineEmits(['click'])
+const slots = useSlots()
+let iconElement = ref()
 
-type Props = {
-  label: string
-  ghost?: boolean
-  bold?: boolean
-  variant?: (typeof ButtonVariants)[number]
-  shape?: (typeof ButtonShape)[number]
-  size?: (typeof ButtonSize)[number]
+const getVariantCls = prefixbtnCls => {
+  const { inverse, variant } = props
+  let btnCls = `${prefixbtnCls}--${variant}`
+
+  if (inverse) btnCls += '-inverse'
+
+  return btnCls
 }
 
-const $style = useCssModule()
-const props = withDefaults(defineProps<Props>(), {
-  label: 'Label',
-  variant: 'primary',
-  shape: 'default',
-  size: 'medium',
-  ghost: false,
-  bold: false,
+const cls = computed(() => {
+  const { size, disabled, rounded, bold, pill } = props
+  const btnCls = prefixClass.concat('-button')
+  let cls = [btnCls]
+
+  cls.push(getVariantCls(btnCls))
+
+  if (size) cls.push(btnCls.concat('--' + size))
+
+  if (pill) cls.push('pill')
+  else if (!rounded) cls.push('no-rounded')
+
+  if (disabled) cls.push('disabled')
+
+  return [cls.join(' ')]
 })
 
-const getVariant = (key: Props['variant']) => {
-  const btnVariants = {
-    primary: 'btn-primary',
+const handleClick = e => {
+  const { disabled } = props
+
+  if (disabled) return
+
+  emit('click', e)
+}
+
+const hasSlot = computed(() => !!slots.default)
+</script>
+<style lang="scss">
+@import './variant.scss';
+@import './size.scss';
+
+.#{$prefixClass}-button {
+  @apply h-9 focus:outline-none rounded px-3 transition duration-300 relative;
+  @apply hover:bg-gray-300 text-gray-800 overflow-hidden whitespace-nowrap;
+
+  @include variant;
+
+  @include size;
+
+  &.no-rounded {
+    @apply rounded-none;
   }
 
-  return btnVariants[key]
-}
+  &.pill {
+    @apply rounded-full;
+  }
 
-const customCls = computed(() => {
-  const { variant, ghost, shape, size, bold } = props
+  &.disabled {
+    @apply disabled:opacity-70 cursor-not-allowed;
+  }
 
-  return [
-    $style['btn'],
-    $style[getVariant(variant)],
-    bold && $style['bold'],
-    ghost && $style['ghost'],
-    $style[shape],
-    $style[size],
-  ]
-})
-</script>
-<style lang="scss" module>
-.btn {
-  padding: 12px 28px;
-  border-radius: 8px;
-  line-height: 24px;
-  font-weight: 500;
-  font-size: 14px;
-  display: flex;
-  justify-content: center;
-  white-space: nowrap;
-  gap: 8px;
+  &--wrapper {
+    @apply h-full flex-grow-0 flex flex-wrap items-center justify-center;
+  }
+
+  &--label {
+    @apply font-bold;
+
+    &.has-icon {
+      @apply ml-2;
+    }
+  }
+
+  &--spinner {
+    @apply w-full h-full flex items-center justify-center;
+  }
 }
 </style>

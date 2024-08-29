@@ -10,21 +10,27 @@ const config: StorybookConfig = {
     name: '@storybook/vue3-vite',
     options: {},
   },
-  staticDirs: ['../src'],
-  viteFinal: async config =>
-    mergeConfig(config, {
+  // staticDirs: ['../src'],
+  viteFinal: async config => {
+    const vueDocgenIndex = config.plugins.findIndex(
+      ({ name }: any) => name === 'storybook:vue-docgen-plugin'
+    )
+    if (vueDocgenIndex !== -1) config.plugins.splice(vueDocgenIndex, 1)
+
+    return mergeConfig(config, {
       plugins: [nxViteTsPaths()],
-      css: {
-        postcss: null,
-        preprocessorOptions: {
-          scss: {
-            additionalData: `
-              @import '../src/style.css';
-            `,
-          },
-        },
-      },
-    }),
+      // css: {
+      //   postcss: null,
+      //   preprocessorOptions: {
+      //     scss: {
+      //       additionalData: `
+      //         @import '../src/style.css';
+      //       `,
+      //     },
+      //   },
+      // },
+    })
+  },
 }
 
 export default config

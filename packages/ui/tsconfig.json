@@ -10,7 +10,8 @@
     "baseUrl": ".",
     "types": ["vite-svg-loader", "vite/client"],
     "lib": [
-      "ES2015"
+      "ES2015",
+      "dom"
     ],
     "paths": {
       "@/*": [
