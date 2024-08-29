@@ -1,0 +1,66 @@
+{
+  "name": "@pomy/ui",
+  "version": "0.0.0",
+  "description": "A shared component library",
+  "private": true,
+  "type": "module",
+  "main": "dist/pomy-ui.umd.js",
+  "module": "dist/pomy-ui.es.js",
+  "types": "dist/main.d.ts",
+  "license": "ISC",
+  "author": {
+    "email": "ferdiardiansa@gmail.com",
+    "name": "ferdiardiansa"
+  },
+  "scripts": {
+    "dev": "nx run @pomy/ui:storybook",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/pomy-ui.es.js",
+      "require": "./dist/pomy-ui.umd.js"
+    },
+    "./dist/pomy-ui.css": {
+      "import": "./dist/my-library-vue-ts.css",
+      "require": "./dist/my-library-vue-ts.css"
+    }
+  },
+  "dependencies": {
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@nrwl/storybook": "^18.2.1",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-url": "^8.0.2",
+    "@storybook/vue3-vite": "7.5.3",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@pomy/ts-config": "workspace:^",
+    "nx-tsconfig-paths.plugin": "link:@nx/vite/plugins/nx-tsconfig-paths.plugin",
+    "path": "^0.12.7",
+    "rollup": "^4.13.2",
+    "rollup-plugin-bundle-fonts": "^1.0.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-svg-import": "^3.0.0",
+    "rollup-plugin-typescript-paths": "^1.5.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "rollup-plugin-vue": "^6.0.0",
+    "sass": "^1.72.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.2.0",
+    "vite-plugin-css-injected-by-js": "^3.5.0",
+    "vite-plugin-dts": "^3.8.1",
+    "vite-plugin-sass-dts": "^1.3.17",
+    "vite-plugin-static-copy": "^1.0.2",
+    "vite-svg-loader": "^4.0.0",
+    "vue": "^3.4.21",
+    "vue-tsc": "^2.0.6"
+  }
+}
