@@ -17,6 +17,7 @@
     "lint:fix": "pnpm nx run-many -t lint:fix",
     "test": "pnpm nx run-many -t test",
     "test:coverage": "pnpm nx run-many -t test:coverage",
+    "build:package": "npx nx run @pomy/ui build",
     "generate-reports": "node ./scripts/generate-reports.js"
   },
   "lint-staged": {

@@ -1,0 +1,38 @@
+/*! @import */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './mixins/index.scss';
+@import './transition/index.scss';
+@import './vars/index.scss';
+
+$prefixClass: 'tx';
+
+html {
+  font-size: 14px;
+  text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  @apply bg-white;
+}
+
+svg,
+i {
+  @apply focus:outline-none;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.#{$prefixClass}-no-scroll {
+  @apply overflow-hidden h-screen;
+}

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`common/Layout/Section will render and match snapshot 1`] = `
+<div
+  class="ss-section"
+>
+  <div
+    class="ss-section--title"
+  >
+    <h3>
+      Title
+    </h3>
+  </div>
+  <div
+    class="ss-section--content"
+  >
+    
+    
+  </div>
+</div>
+`;
