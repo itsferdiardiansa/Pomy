@@ -1,4 +1,0 @@
-{
-  "temp-dir": "./.nyc_reports",
-  "reporter": ["lcov", "json"]
-}

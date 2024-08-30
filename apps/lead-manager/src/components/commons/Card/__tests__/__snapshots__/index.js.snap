@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`common/Card will render children correctly 1`] = `
+<card-stub>
+  <div
+    class="content"
+  />
+</card-stub>
+`;
+
+exports[`common/Card will render match snapshot 1`] = `
+<div
+  class="ss-card"
+>
+  
+  
+</div>
+`;
